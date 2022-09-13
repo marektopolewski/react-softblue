@@ -11,8 +11,6 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Comments from "./comments/Comments";
 
-import './App.css'
-
 const App = () => {
   return (
       <BrowserRouter>

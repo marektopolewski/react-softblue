@@ -1,0 +1,13 @@
+.wrapper {
+  width: 60%;
+  margin: auto;
+}
+
+.text {
+  column-count: 2;
+  column-gap: 2em;
+}
+
+.para {
+  margin-bottom: 2em;
+}
