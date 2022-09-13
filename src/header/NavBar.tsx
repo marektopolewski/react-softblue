@@ -22,8 +22,8 @@ const NavLinkWrapper: React.FC<{ to: string }> = (props) => {
   );
 };
 
-const CommentsButton = () => {
-  const clickHandler = () => alert('comments clicked');
+const CommentsButton: React.FC<{ onClicked: () => void }> = (props) => {
+  const clickHandler = () => { props.onClicked(); };
   return (
     <div className={classes['link-wrapper']}>
       <button className={classes.link} onClick={clickHandler}>Comments</button>
@@ -31,7 +31,7 @@ const CommentsButton = () => {
   );
 };
 
-const NavBar = () => {
+const NavBar: React.FC<{ onScrollToComments: () => void }> = (props) => {
   return (
     <nav>
       <div className={classes['navbar-wrapper']}>
@@ -41,7 +41,7 @@ const NavBar = () => {
           <NavLinkWrapper to='Home' />
           <NavLinkWrapper to='Services' />
           <NavLinkWrapper to='Experience' />
-          <CommentsButton />
+          <CommentsButton onClicked={props.onScrollToComments} />
         </div>
       </div>
     </nav>

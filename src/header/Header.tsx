@@ -2,11 +2,11 @@ import NavBar from './NavBar';
 
 import classes from './Header.module.css';
 
-const Header = () => {
+const Header: React.FC<{ onScrollToComments: () => void }> = (props) => {
   return (
     <header>
       <div className={classes['header-wrapper']}>
-        <NavBar />
+        <NavBar onScrollToComments={props.onScrollToComments} />
       </div>
     </header>
   );

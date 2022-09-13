@@ -11,12 +11,19 @@ import Home from './pages/Home';
 import Services from './pages/Services';
 import Comments from './comments/Comments';
 import Footer from './components/Footer';
+import { useRef } from 'react';
 
 const App = () => {
+  const scrollToRef = useRef<HTMLDivElement>(null);
+  const onScrollToComments = () => {
+    if (!scrollToRef.current)
+      return;
+    scrollToRef.current.scrollIntoView();
+  };
   return (
       <>
       <BrowserRouter>
-        <Header />
+        <Header onScrollToComments={onScrollToComments} />
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/experience' element={<Experience />} />
@@ -24,7 +31,7 @@ const App = () => {
           <Route path='/*' element={<Navigate to='/home' replace />} />
         </Routes>
       </BrowserRouter>
-      <Comments />
+      <Comments ref={scrollToRef} />
       <Footer />
       </>
   );
