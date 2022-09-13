@@ -10,7 +10,7 @@ const Services = () => {
       <PageHeader title='SERVICES' subtitle='Lorem ipsum' />
       <div className={classes.text}>
         {
-          loremIpsum({ p: 9, random: false }).map((text: string, index: number) => (
+          loremIpsum({ p: 10, random: false }).map((text: string, index: number) => (
             <p className={classes.para} key={index}>
               {text}
             </p>
