@@ -1,7 +1,12 @@
 import classes from './PageWrapper.module.css';
 
-const PageWrapper: React.FC<{ children: React.ReactNode }> = (props) => (
-  <div className={classes.wrapper}>
+type PageWrapperProps = {
+  className?: string
+  children: React.ReactNode
+}
+
+const PageWrapper: React.FC<PageWrapperProps> = (props) => (
+  <div className={`${classes.wrapper} ${props.className}`}>
     {props.children}
   </div>
 );

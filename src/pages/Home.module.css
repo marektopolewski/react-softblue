@@ -1,0 +1,51 @@
+.what-we-do {
+  padding-top: 3em;
+  padding-bottom: 5em;
+  background-color: #060d17;
+}
+
+.services-items-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+
+.services-items-wrapper div {
+  max-width: 250px;
+}
+
+.services-items-wrapper p {
+  text-align: center;
+}
+
+.service-item-name {
+  font-weight: bold;
+}
+
+.service-item-desc {
+  font-size: smaller;
+}
+
+.my-experience {
+  padding-top: 3em;
+  padding-bottom: 5em;
+  background-color: #06101b;
+}
+
+.exp-items-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1080px;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.exp-item {
+  box-shadow: 0 0 20px black;
+  padding: 20px;
+  width: 400px;
+}
