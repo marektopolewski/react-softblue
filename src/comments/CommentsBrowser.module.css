@@ -1,0 +1,56 @@
+.wrapper {
+  padding-top: 3em;
+  padding-bottom: 5em;
+  max-width: 700px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sort {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.sort button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: bold;
+  color: inherit;
+}
+
+.comment {
+  margin-top: 4em;
+  margin-bottom: 4em;
+}
+
+.comment p, h5 {
+  opacity: 0.8;
+}
+
+.pages {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.pages button {
+  width: 40px;
+  height: 50px;
+  background-color: #041f2a;
+  text-align: center;
+
+  font: inherit;
+  font-weight: bold;
+  color: inherit;
+}
+
+.active-page {
+  background-color: #03bfd5 !important;
+}

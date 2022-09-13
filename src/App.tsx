@@ -24,8 +24,8 @@ const App = () => {
           <Route path='/*' element={<Navigate to='/home' replace />} />
         </Routes>
       </BrowserRouter>
-      <Comments/>
-      <Footer/>
+      <Comments />
+      <Footer />
       </>
   );
 };
