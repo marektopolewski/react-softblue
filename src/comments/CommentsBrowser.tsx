@@ -26,6 +26,22 @@ type CommentsItemProps = {
   createdAt: string,
 };
 
+const Comment = (item: CommentsItemProps) => (
+  <div className={classes.comment}>
+    <h5>{toLocaleDateString(item.createdAt)}</h5>
+    {
+      item.name
+        ? <h3>{item.name} {item.email}</h3>
+        : <h3><i>Anonymous</i> {item.email}</h3>
+    }
+    {
+      item.content
+        ? <p>{item.content}</p>
+        : <p><i>empty message</i></p>
+    }
+  </div>
+);
+
 const CommentsBrowser = () => {
   const [comments,] = useHttpRequest<CommentsItemProps>('comments');
   const onOldestClickHanlder = () => { alert('sort by oldest') };
@@ -35,13 +51,6 @@ const CommentsBrowser = () => {
   const changePage = (newPage: number) => {
     setPage(newPage);
   };
-
-  if (!comments || comments.length === 0)
-    return (
-      <PageWrapper className={classes.wrapper}>
-        <p>Loading...</p>
-      </PageWrapper>
-    );
 
   return (
     <PageWrapper className={classes.wrapper}>
@@ -56,30 +65,22 @@ const CommentsBrowser = () => {
       </div>
 
       {
-        comments
-          .slice((page - 1) * NUM_OF_COMMENTS, page * NUM_OF_COMMENTS)
-          .map(item => (
-            <div key={item.id} className={classes.comment}>
-              <h5>{toLocaleDateString(item.createdAt)}</h5>
-              {
-                item.name
-                  ? <h3>{item.name} {item.email}</h3>
-                  : <h3><i>Anonymous</i> {item.email}</h3>
-              }
-              {
-                item.content
-                  ? <p>{item.content}</p>
-                  : <p><i>empty message</i></p>
-              }
-            </div>
-          ))
+        comments && comments.length > 0
+          ? comments
+            .slice((page - 1) * NUM_OF_COMMENTS, page * NUM_OF_COMMENTS)
+            .map(item => <Comment key={item.id} {...item} />)
+          :
+            <p>Loading...</p>
       }
 
-      <CommentsBrowserPager
-        currentPage={page}
-        maxPages={Math.floor(comments.length / NUM_OF_COMMENTS)}
-        onPageRequested={changePage}
-      />
+      {
+        comments && comments.length > 0 &&
+          <CommentsBrowserPager
+            currentPage={page}
+            maxPages={Math.floor(comments.length / NUM_OF_COMMENTS)}
+            onPageRequested={changePage}
+          />
+      }
 
     </PageWrapper>
   );

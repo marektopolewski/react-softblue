@@ -16,9 +16,7 @@ import { useRef } from 'react';
 const App = () => {
   const scrollToRef = useRef<HTMLDivElement>(null);
   const onScrollToComments = () => {
-    if (!scrollToRef.current)
-      return;
-    scrollToRef.current.scrollIntoView();
+    scrollToRef.current?.scrollIntoView();
   };
   return (
       <>
