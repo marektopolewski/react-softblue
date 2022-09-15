@@ -1,5 +1,8 @@
 import React, { useReducer } from 'react';
+
 import PageWrapper from '../components/PageWrapper';
+
+import useHttpRequest from '../hooks/UseHttpRequestHook';
 
 import classes from './AddComment.module.css';
 
@@ -24,24 +27,31 @@ const AddComment = () => {
 
   const [formState, formDispatch] = useReducer(
     (state: FormReducerState, action: FormReducerAction) => {
-      if (action.type === 'name')
-        return { ...state, name: action.payload ?? '' };
-      if (action.type === 'email')
-        return { ...state, email: action.payload ?? '' };
-      if (action.type === 'content')
-        return { ...state, content: action.payload ?? '' };
-      if (action.type === 'clear')
+      const { type, payload } = action;
+      if (type === 'name')
+        return { ...state, name: payload ?? '' };
+      if (type === 'email')
+        return { ...state, email: payload ?? '' };
+      if (type === 'content')
+        return { ...state, content: payload ?? '' };
+      if (type === 'clear')
         return new FormReducerState();
       return state;
     },
     new FormReducerState()
   );
 
+  const [, sendComment] = useHttpRequest<any>('comments', true);
+
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const payload = (({ name, email, content }) => ({name, email, content}))(formState);
-    alert("sending:\n\n" + JSON.stringify(payload));
     formDispatch({ type: 'clear' });
+    sendComment({
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" }
+    });
   };
 
   return (
@@ -59,12 +69,14 @@ const AddComment = () => {
             <input
               type='text' name='name'
               placeholder='Your Name'
+              required maxLength={40} pattern='[\w\s]*'
               value={formState.name}
               onChange={event => formDispatch({ type: 'name', payload: event.target.value})}
             />
             <input
               type='email' name='email'
               placeholder='Your Email'
+              required
               value={formState.email}
               onChange={event => formDispatch({ type: 'email', payload: event.target.value})}
             />
@@ -73,6 +85,7 @@ const AddComment = () => {
             name='message'
             rows={4}
             placeholder='Your Messages'
+            required maxLength={400}
             value={formState.content}
             onChange={event => formDispatch({ type: 'content', payload: event.target.value})}
           />

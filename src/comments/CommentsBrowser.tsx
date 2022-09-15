@@ -77,7 +77,7 @@ const CommentsBrowser = () => {
         comments && comments.length > 0 &&
           <CommentsBrowserPager
             currentPage={page}
-            maxPages={Math.floor(comments.length / NUM_OF_COMMENTS)}
+            maxPages={Math.ceil(comments.length / NUM_OF_COMMENTS)}
             onPageRequested={changePage}
           />
       }
