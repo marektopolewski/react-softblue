@@ -1,0 +1,56 @@
+.wrapper {
+  padding-top: 3em;
+  padding-bottom: 5em;
+  max-width: 700px;
+}
+
+.header {
+  margin-bottom: 2em;
+}
+
+.hr-wrapper {
+  margin-top: -10px;
+}
+
+.hr {
+  height: 0;
+  border: 0.5px solid grey;
+  margin-bottom: 5px;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-wrapper input, textarea {
+  margin-bottom: 2em;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  font: inherit;
+  color: inherit;
+  padding: 8px;
+  resize: none;
+}
+
+.form-wrapper ::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.form-who {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-who input {
+  width: 45%;
+}
+
+.form-wrapper button {
+  width: 200px;
+  height: 50px;
+  color: white;
+  background-color: #03bfd5;
+}

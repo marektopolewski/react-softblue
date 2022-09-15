@@ -6,10 +6,14 @@ import { forwardRef } from 'react';
 
 const Comments = forwardRef<HTMLDivElement>((props, scrollToRef) => {
   return (
-    <div ref={scrollToRef} className={classes.wrapper}>
-      <CommentsBrowser />
-      <AddComment />
-    </div>
+    <>
+      <div ref={scrollToRef} className={classes['browser-wrapper']}>
+        <CommentsBrowser />
+      </div>
+      <div className={classes['add-comment-wrapper']}>
+        <AddComment />
+      </div>
+    </>
   );
 });
 
