@@ -1,0 +1,9 @@
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-align: center;
+}

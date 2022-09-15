@@ -54,17 +54,12 @@
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
 }
-.activeLink {
+.active-link {
   text-decoration: underline;
   text-decoration-color: #00bfd6;
 }
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font: inherit;
-  font-weight: bold;
+.comment-link {
+  background-color: #00bfd6;
 }
 
 .hello {

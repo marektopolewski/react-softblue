@@ -15,7 +15,7 @@ const NavLinkWrapper: React.FC<{ to: string }> = (props) => {
   const url = '/' + props.to.toLocaleLowerCase();
   return (
     <div className={classes['link-wrapper']}>
-      <NavLink className={linkState => `${classes.link} ${linkState.isActive ? classes.activeLink : ''}`} to={url}>
+      <NavLink className={linkState => `${classes.link} ${linkState.isActive ? classes['active-link'] : ''}`} to={url}>
         {props.to}
       </NavLink>
     </div>
@@ -25,7 +25,7 @@ const NavLinkWrapper: React.FC<{ to: string }> = (props) => {
 const CommentsButton: React.FC<{ onClicked: () => void }> = (props) => {
   const clickHandler = () => { props.onClicked(); };
   return (
-    <div className={classes['link-wrapper']}>
+    <div className={`${classes['link-wrapper']} ${classes['comment-link']}`}>
       <button type='button' className={classes.link} onClick={clickHandler}>Comments</button>
     </div>
   );

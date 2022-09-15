@@ -13,6 +13,8 @@ import Comments from './comments/Comments';
 import Footer from './components/Footer';
 import { useRef } from 'react';
 
+import './App.css'
+
 const App = () => {
   const scrollToRef = useRef<HTMLDivElement>(null);
   const onScrollToComments = () => {
