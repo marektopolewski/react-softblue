@@ -2,6 +2,8 @@ import { loremIpsum } from 'react-lorem-ipsum';
 
 import PageHeader from '../components/PageHeader';
 import PageWrapper from '../components/PageWrapper';
+import Loading from '../components/Loading';
+
 import useHttpRequest from '../hooks/UseHttpRequestHook';
 
 import classes from './Home.module.css';
@@ -46,9 +48,9 @@ const Home = () => {
           <PageHeader title='WHAT WE DO' subtitle='Better Services For You' />
           <p>{loremIpsum({ avgWordsPerSentence: 4 })}</p>
           <div className={classes['services-items-wrapper']}>
-            {
-              services.map(item => <ServicesItem key={item.id} {...item} />)
-            }
+            <Loading what='services' data={services}>
+              { services?.map(item => <ServicesItem key={item.id}  {...item} />) }
+            </Loading>
           </div>
         </PageWrapper>
       </div>
@@ -58,9 +60,9 @@ const Home = () => {
           <PageHeader title='QUALIFICATION' subtitle='My Experience' />
           <p>{loremIpsum({ avgWordsPerSentence: 5 })}</p>
           <div className={classes['exp-items-wrapper']}>
-            {
-              experience.map(item => <ExperienceItem key={item.id}  {...item} />)
-            }
+            <Loading what='experience items' data={experience}>
+              { experience?.map(item => <ExperienceItem key={item.id}  {...item} />) }
+            </Loading>
           </div>
         </PageWrapper>
       </div>

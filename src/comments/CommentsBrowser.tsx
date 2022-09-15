@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import PageWrapper from '../components/PageWrapper';
+import Loading from '../components/Loading';
 import CommentsBrowserPager from './CommentsBrowserPager';
 
 import useHttpRequest from '../hooks/UseHttpRequestHook';
@@ -81,24 +82,22 @@ const CommentsBrowser = () => {
         </div>
       </div>
 
-      {
-        comments && comments.length > 0
-          ? comments
+      <Loading what='comments' data={comments}>
+        { 
+          comments && comments
             .sort((c1, c2) => compareStringDates(c1.createdAt, c2.createdAt, sortOrder))
             .slice((page - 1) * NUM_OF_COMMENTS, page * NUM_OF_COMMENTS)
             .map(item => <Comment key={item.id} {...item} />)
-          :
-            <p>Loading...</p>
-      }
+        }
+      </Loading>
 
-      {
-        comments && comments.length > 0 &&
-          <CommentsBrowserPager
-            currentPage={page}
-            maxPages={Math.ceil(comments.length / NUM_OF_COMMENTS)}
-            onPageRequested={changePage}
-          />
-      }
+      <Loading what='comments pages' data={comments}>
+        <CommentsBrowserPager
+          currentPage={page}
+          maxPages={Math.ceil((comments?.length ?? 0) / NUM_OF_COMMENTS)}
+          onPageRequested={changePage}
+        />
+      </Loading>
 
     </PageWrapper>
   );
