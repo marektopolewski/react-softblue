@@ -23,6 +23,7 @@ const CommentsBrowserPager: React.FC<CommentsBrowserPagerProps> = (props) => {
         pagesToList.map(page => (
           <button
             key={page}
+            type='button'
             className={page === currentPage ? classes['active-page'] : ''}
             onClick={() => { onPageRequested(page); }}
           >

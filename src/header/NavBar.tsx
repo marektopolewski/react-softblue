@@ -26,7 +26,7 @@ const CommentsButton: React.FC<{ onClicked: () => void }> = (props) => {
   const clickHandler = () => { props.onClicked(); };
   return (
     <div className={classes['link-wrapper']}>
-      <button className={classes.link} onClick={clickHandler}>Comments</button>
+      <button type='button' className={classes.link} onClick={clickHandler}>Comments</button>
     </div>
   );
 };
