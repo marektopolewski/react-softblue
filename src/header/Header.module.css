@@ -66,3 +66,27 @@ button {
   font: inherit;
   font-weight: bold;
 }
+
+.hello {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-25%, -50%);
+}
+
+.hello h4 {
+  margin: 0;
+}
+
+.hello h1 {
+  margin: 0;
+  font-size: 4em;
+}
+
+.hello h1 span {
+  color: #00bfd6;
+}
+
+.hello li {
+  margin-top: 1em;
+}
