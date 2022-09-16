@@ -18,7 +18,7 @@ import './App.css'
 const App = () => {
   const scrollToRef = useRef<HTMLDivElement>(null);
   const onScrollToComments = () => {
-    scrollToRef.current?.scrollIntoView();
+    scrollToRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
       <>
