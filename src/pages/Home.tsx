@@ -14,6 +14,8 @@ import Service247Support from './imgs/support.png'
 import ExperienceBe from './imgs/be.png'
 import ExperienceDribble from './imgs/dribble.png'
 
+import { ServiceData, ExperienceData } from '../types';
+
 const serviceIdToImage = (id: number): string => {
   switch(id) {
     case 1: return ServiceFullyResponsive;
@@ -23,13 +25,7 @@ const serviceIdToImage = (id: number): string => {
   return '';
 };
 
-type ServicesItemProps = {
-  id: string
-  name: string
-  description: string
-};
-
-const ServicesItem: React.FC<ServicesItemProps> = (props) => (
+const ServicesItem: React.FC<ServiceData> = (props) => (
   <div>
     <img src={serviceIdToImage(parseInt(props.id))} alt={`service ${props.id}`} />
     <p className={classes['service-item-name']}>{props.name.toUpperCase()}</p>
@@ -56,15 +52,7 @@ const toLocaleDateString = (dateString: string) => {
   return (new Date(dateString)).toLocaleDateString('en-US', options);
 };
 
-type ExperienceItemProps = {
-  id: string
-  company: string
-  description: string
-  from: string
-  to: string
-};
-
-const ExperienceItem: React.FC<ExperienceItemProps> = (props) => (
+const ExperienceItem: React.FC<ExperienceData> = (props) => (
   <div className={classes['exp-item']}>
     <div className={classes['exp-header']}>
       <img src={experienceIdToImage(parseInt(props.id))} alt={`experience ${props.id}`} />
@@ -83,8 +71,8 @@ const ExperienceItem: React.FC<ExperienceItemProps> = (props) => (
 );
 
 const Home = () => {
-  const [services,] = useHttpRequest<ServicesItemProps>('services');
-  const [experience,] = useHttpRequest<ExperienceItemProps>('experience');
+  const [services,] = useHttpRequest<ServiceData>('services');
+  const [experience,] = useHttpRequest<ExperienceData>('experience');
   return (
     <>
       <div className={classes['what-we-do']}>

@@ -5,6 +5,7 @@ import Loading from '../components/Loading';
 import CommentsBrowserPager from './CommentsBrowserPager';
 
 import useHttpRequest from '../hooks/UseHttpRequestHook';
+import { CommentData } from '../types';
 
 import classes from './CommentsBrowser.module.css';
 
@@ -30,15 +31,7 @@ const compareStringDates = (dateString1: string, dateString2: string, order: Sor
   return -1;
 };
 
-type CommentsItemProps = {
-  id: string,
-  name: string,
-  email: string,
-  content: string,
-  createdAt: string,
-};
-
-const Comment = (item: CommentsItemProps) => (
+const Comment = (item: CommentData) => (
   <div className={classes.comment}>
     <h5>{toLocaleDateString(item.createdAt)}</h5>
     {
@@ -55,7 +48,7 @@ const Comment = (item: CommentsItemProps) => (
 );
 
 const CommentsBrowser = () => {
-  const [comments,] = useHttpRequest<CommentsItemProps>('comments');
+  const [comments,] = useHttpRequest<CommentData>('comments');
   const [sortOrder, setSortOrder] = useState<SortOrder>(-1);
 
   const onOldestClickHanlder = () => { setSortOrder(1); };

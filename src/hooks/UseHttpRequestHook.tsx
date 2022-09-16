@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import  { RequestData } from '../types';
+
 const BACKEND_URL = 'https://62cbcfcd8042b16aa7c2d987.mockapi.io/blog/api';
 
 type HttpOptions = {
@@ -8,12 +10,12 @@ type HttpOptions = {
   headers?: HeadersInit
 };
 
-type Maybe<Data> = undefined | Data[];
+type MaybeArray<T> = T[] | undefined;
 
 type MakeRequestFoo = (options?: HttpOptions) => void;
 
-export default function useHttpRequest<Data>(endpoint: string, explicit?: boolean): [Maybe<Data>, MakeRequestFoo] {
-  const [data, setData] = useState<Maybe<Data>>([]);
+export default function useHttpRequest<T extends RequestData>(endpoint: string, explicit?: boolean): [MaybeArray<T>, MakeRequestFoo] {
+  const [data, setData] = useState<MaybeArray<T>>([]);
 
   const makeRequest = useCallback(async (options?: HttpOptions) => {
     const response = await fetch(`${BACKEND_URL}/${endpoint}`, options);
@@ -21,7 +23,7 @@ export default function useHttpRequest<Data>(endpoint: string, explicit?: boolea
       setData(undefined);
       return;
     }
-    const json: Data[] = await response.json();
+    const json: T[] = await response.json();
     setData(json);
   }, [setData, endpoint]);
 

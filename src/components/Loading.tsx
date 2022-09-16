@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { RequestDataArray } from '../types';
 
-const LOADING_TEXT = "...";
+const LOADING_TEXT = '...';
 
 type LoadingProps = {
   what: string,
-  data: any[] | undefined,
+  data: RequestDataArray,
   children: React.ReactNode,
 }
 
