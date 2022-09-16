@@ -5,11 +5,11 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import Header from './header/Header';
+import Header from './components/header/Header';
 import Experience from './pages/Experience';
 import Home from './pages/Home';
 import Services from './pages/Services';
-import Comments from './comments/Comments';
+import Comments from './components/comments/Comments';
 import Footer from './components/Footer';
 import { useRef } from 'react';
 

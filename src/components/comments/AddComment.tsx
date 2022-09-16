@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
 
-import PageWrapper from '../components/PageWrapper';
+import PageWrapper from '../PageWrapper';
 
-import useHttpRequest from '../hooks/UseHttpRequestHook';
+import useHttpRequest from '../../hooks/UseHttpRequestHook';
 
 import classes from './AddComment.module.css';
 
@@ -50,7 +50,7 @@ const AddComment = () => {
     sendComment({
       method: 'POST',
       body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     });
   };
 

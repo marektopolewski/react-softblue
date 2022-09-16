@@ -44,7 +44,7 @@ const experienceIdToImage = (id: number): string => {
 
 const toLocaleDateString = (dateString: string) => {
   if (!dateString || dateString === '')
-    return "";
+    return '';
   const options: Intl.DateTimeFormatOptions = {
     month: 'long',
     year: 'numeric'

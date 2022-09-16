@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import PageWrapper from '../components/PageWrapper';
-import Loading from '../components/Loading';
+import PageWrapper from '../PageWrapper';
+import Loading from '../Loading';
 import CommentsBrowserPager from './CommentsBrowserPager';
 
-import useHttpRequest from '../hooks/UseHttpRequestHook';
-import { CommentData } from '../types';
+import useHttpRequest from '../../hooks/UseHttpRequestHook';
+import { CommentData } from '../../types';
 
 import classes from './CommentsBrowser.module.css';
 
