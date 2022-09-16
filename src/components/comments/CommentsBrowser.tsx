@@ -5,20 +5,13 @@ import Loading from '../Loading';
 import CommentsBrowserPager from './CommentsBrowserPager';
 
 import useHttpRequest from '../../hooks/UseHttpRequestHook';
-import { CommentData } from '../../types';
 
 import classes from './CommentsBrowser.module.css';
 
-const NUM_OF_COMMENTS = 4;
+import { CommentData } from '../../types';
+import { toLocaleDateString } from '../../utils/datestring';
 
-const toLocaleDateString = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  };
-  return (new Date(dateString)).toLocaleDateString('en-US', options);
-}
+const COMMENTS_PER_PAGE = 4;
 
 type SortOrder = (-1 | 1);
 const compareStringDates = (dateString1: string, dateString2: string, order: SortOrder): number => {
@@ -33,7 +26,7 @@ const compareStringDates = (dateString1: string, dateString2: string, order: Sor
 
 const Comment = (item: CommentData) => (
   <div className={classes.comment}>
-    <h5>{toLocaleDateString(item.createdAt)}</h5>
+    <h5>{toLocaleDateString(item.createdAt, { month: 'short', day: 'numeric', year: 'numeric' })}</h5>
     {
       item.name
         ? <h3>{item.name} {item.email}</h3>
@@ -79,7 +72,7 @@ const CommentsBrowser = () => {
         { 
           comments && comments
             .sort((c1, c2) => compareStringDates(c1.createdAt, c2.createdAt, sortOrder))
-            .slice((page - 1) * NUM_OF_COMMENTS, page * NUM_OF_COMMENTS)
+            .slice((page - 1) * COMMENTS_PER_PAGE, page * COMMENTS_PER_PAGE)
             .map(item => <Comment key={item.id} {...item} />)
         }
       </Loading>
@@ -87,7 +80,7 @@ const CommentsBrowser = () => {
       <Loading what='comments pages' data={comments}>
         <CommentsBrowserPager
           currentPage={page}
-          maxPages={Math.ceil((comments?.length ?? 0) / NUM_OF_COMMENTS)}
+          maxPages={Math.ceil((comments?.length ?? 0) / COMMENTS_PER_PAGE)}
           onPageRequested={changePage}
         />
       </Loading>

@@ -15,6 +15,7 @@ import ExperienceBe from './imgs/be.png'
 import ExperienceDribble from './imgs/dribble.png'
 
 import { ServiceData, ExperienceData } from '../types';
+import { toLocaleDateString } from '../utils/datestring';
 
 const serviceIdToImage = (id: number): string => {
   switch(id) {
@@ -42,14 +43,9 @@ const experienceIdToImage = (id: number): string => {
   return '';
 };
 
-const toLocaleDateString = (dateString: string) => {
-  if (!dateString || dateString === '')
-    return '';
-  const options: Intl.DateTimeFormatOptions = {
-    month: 'long',
-    year: 'numeric'
-  };
-  return (new Date(dateString)).toLocaleDateString('en-US', options);
+const EXP_DATE_FORMAT: Intl.DateTimeFormatOptions = {
+  month: 'long',
+  year: 'numeric'
 };
 
 const ExperienceItem: React.FC<ExperienceData> = (props) => (
@@ -61,7 +57,7 @@ const ExperienceItem: React.FC<ExperienceData> = (props) => (
           {props.company}
         </p>
         <p className={classes['exp-item-dates']}>
-          {toLocaleDateString(props.from)} - {toLocaleDateString(props.to)}
+          {toLocaleDateString(props.from, EXP_DATE_FORMAT)} - {toLocaleDateString(props.to, EXP_DATE_FORMAT)}
         </p>
       </div>
     </div>
