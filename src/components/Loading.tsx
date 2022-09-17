@@ -9,7 +9,7 @@ type LoadingProps = {
   children: React.ReactNode,
 }
 
-const LoadingDots = () => {
+export const LoadingDots = () => {
   const [text, setText] = useState<string>('');
 
   useEffect(() => {

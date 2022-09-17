@@ -6,14 +6,22 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/header/Header';
-import Experience from './pages/Experience';
-import Home from './pages/Home';
-import Services from './pages/Services';
 import Comments from './components/comments/Comments';
 import Footer from './components/Footer';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import './App.css'
+import { LoadingDots } from './components/Loading';
+
+const Home = React.lazy(() => import('./pages/Home'));
+const Experience = React.lazy(() => import('./pages/Experience'));
+const Services = React.lazy(() => import('./pages/Services'));
+
+const LazyPage: React.FC<{ children: React.ReactElement }> = (props) => (
+  <React.Suspense fallback={<LoadingDots />}>
+    {props.children}
+  </React.Suspense>
+);
 
 const App = () => {
   const scrollToRef = useRef<HTMLDivElement>(null);
@@ -25,9 +33,9 @@ const App = () => {
       <BrowserRouter>
         <Header onScrollToComments={onScrollToComments} />
         <Routes>
-          <Route path='/home' element={<Home />} />
-          <Route path='/experience' element={<Experience />} />
-          <Route path='/services' element={<Services />} />
+          <Route path='/home' element={<LazyPage><Home /></LazyPage>} />
+          <Route path='/experience' element={<LazyPage><Experience /></LazyPage>} />
+          <Route path='/services' element={<LazyPage><Services /></LazyPage>} />
           <Route path='/*' element={<Navigate to='/home' replace />} />
         </Routes>
       </BrowserRouter>
