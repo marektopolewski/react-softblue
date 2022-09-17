@@ -10,7 +10,7 @@ const Header: React.FC<{ onScrollToComments: () => void }> = (props) => {
         <div className={classes.hello}>
           <h4>Hello!</h4>
           <h1>I am a <span>HRS</span> Pathan</h1>
-          <h1>Creative UI/UX Designer</h1>
+          <div className={classes.drunk}><h1>Creative UI/UX Designer</h1></div>
           <ol>
             <li>UI/UX Design</li>
             <li>Product Design</li>

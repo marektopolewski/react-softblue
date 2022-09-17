@@ -85,3 +85,15 @@
 .hello li {
   margin-top: 1em;
 }
+
+@keyframes drunkAnimation {
+  0%   { transform: skewX(0deg)   scaleY(1.0); color: white }
+  25%  { transform: skewX(20deg)  scaleY(0.8); color: rgb(154, 214, 154) }
+  50%  { transform: skewX(0deg)   scaleY(1.0); color: white;}
+  75%  { transform: skewX(-20deg) scaleY(0.8); color: rgb(226, 114, 114); }
+  100% { transform: skewX(0deg)   scaleY(1.0); color: white; } 
+}
+
+.drunk:hover {
+  animation: drunkAnimation 1s linear infinite;
+}

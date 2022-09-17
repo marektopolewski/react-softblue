@@ -3,14 +3,22 @@ import { click } from '@testing-library/user-event/dist/click';
 import { type } from '@testing-library/user-event/dist/type';
 
 import AddComment from './AddComment';
+import { AnimatedButton, AnimatedButtonProps } from '../AnimatedButton';
 import { useHttpRequest } from '../../hooks/UseHttpRequestHook';
 
 type RequestFooArgs = Parameters<ReturnType<typeof useHttpRequest>[1]>[0];
 
 jest.mock('../../hooks/UseHttpRequestHook');
+jest.mock('../AnimatedButton');
 jest.spyOn(window, 'alert');
 
 describe('Test adding comments', () => {
+
+  beforeEach(() => {
+    (AnimatedButton as jest.Mock).mockImplementation((props: AnimatedButtonProps) => {
+      return <button type={props.type}>{props.text}</button>;
+    });
+  });
 
   test('Form submited on "Send" clicked', () => {
 

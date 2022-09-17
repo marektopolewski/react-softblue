@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 
 import PageWrapper from '../PageWrapper';
+import { AnimatedButton } from '../AnimatedButton';
 
 import { useHttpRequest } from '../../hooks/UseHttpRequestHook';
 
@@ -93,7 +94,7 @@ const AddComment: React.FC<{ onAdded: () => void }> = (props) => {
             value={formState.content}
             onChange={event => formDispatch({ type: 'content', payload: event.target.value})}
           />
-          <button type='submit'>Send</button>
+          <AnimatedButton type='submit' text='Send' />
       </form>
 
     </PageWrapper>
