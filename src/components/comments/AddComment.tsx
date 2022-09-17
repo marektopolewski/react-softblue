@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 import PageWrapper from '../PageWrapper';
 
-import useHttpRequest from '../../hooks/UseHttpRequestHook';
+import { useHttpRequest } from '../../hooks/UseHttpRequestHook';
 
 import classes from './AddComment.module.css';
 
@@ -45,11 +45,13 @@ const AddComment = () => {
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const payload = (({ name, email, content }) => ({name, email, content}))(formState);
+    const { name, email, content } = formState;
+    if (name === '' || email === '' || content === '')
+      return;
     formDispatch({ type: 'clear' });
     sendComment({
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ name, email, content }),
       headers: { 'Content-Type': 'application/json' }
     });
   };
@@ -64,17 +66,17 @@ const AddComment = () => {
         </div>
       </div>
 
-      <form className={classes['form-wrapper']} onSubmit={onSubmitHandler}>
+      <form aria-label='form' className={classes['form-wrapper']} onSubmit={onSubmitHandler}>
           <div className={classes['form-who']}>
             <input
-              type='text' name='name'
+              type='text' name='name' aria-label='name'
               placeholder='Your Name'
               required maxLength={40} pattern='[\w\s]*'
               value={formState.name}
               onChange={event => formDispatch({ type: 'name', payload: event.target.value})}
             />
             <input
-              type='email' name='email'
+              type='email' name='email' aria-label='email'
               placeholder='Your Email'
               required
               value={formState.email}
@@ -82,7 +84,7 @@ const AddComment = () => {
             />
           </div>
           <textarea
-            name='message'
+            name='message' aria-label='message'
             rows={4}
             placeholder='Your Messages'
             required maxLength={400}

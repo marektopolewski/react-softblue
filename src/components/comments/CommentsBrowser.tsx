@@ -4,7 +4,7 @@ import PageWrapper from '../PageWrapper';
 import Loading from '../Loading';
 import CommentsBrowserPager from './CommentsBrowserPager';
 
-import useHttpRequest from '../../hooks/UseHttpRequestHook';
+import { useHttpRequest } from '../../hooks/UseHttpRequestHook';
 
 import classes from './CommentsBrowser.module.css';
 

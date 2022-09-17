@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader';
 import PageWrapper from '../components/PageWrapper';
 import Loading from '../components/Loading';
 
-import useHttpRequest from '../hooks/UseHttpRequestHook';
+import { useHttpRequest } from '../hooks/UseHttpRequestHook';
 
 import classes from './Home.module.css';
 

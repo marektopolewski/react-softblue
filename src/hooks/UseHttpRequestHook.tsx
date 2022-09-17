@@ -14,17 +14,21 @@ type MaybeArray<T> = T[] | undefined;
 
 type MakeRequestFoo = (options?: HttpOptions) => void;
 
-export default function useHttpRequest<T extends RequestData>(endpoint: string, explicit?: boolean): [MaybeArray<T>, MakeRequestFoo] {
+export function useHttpRequest<T extends RequestData>(endpoint: string, explicit?: boolean): [MaybeArray<T>, MakeRequestFoo] {
   const [data, setData] = useState<MaybeArray<T>>([]);
 
   const makeRequest = useCallback(async (options?: HttpOptions) => {
-    const response = await fetch(`${BACKEND_URL}/${endpoint}`, options);
-    if (!response.ok) {
-      setData(undefined);
-      return;
+    try {
+      const response = await fetch(`${BACKEND_URL}/${endpoint}`, options);
+      console.log(response)
+      if (!response.ok)
+        throw new Error();
+      const json: T[] = await response.json();
+      setData(json);
     }
-    const json: T[] = await response.json();
-    setData(json);
+    catch (err: any) {
+      setData(undefined);
+    }
   }, [setData, endpoint]);
 
   useEffect(() => {
