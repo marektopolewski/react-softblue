@@ -4,12 +4,10 @@ import PageWrapper from '../PageWrapper';
 import Loading from '../Loading';
 import CommentsBrowserPager from './CommentsBrowserPager';
 
-import { useHttpRequest } from '../../hooks/UseHttpRequestHook';
-
-import classes from './CommentsBrowser.module.css';
-
 import { CommentData } from '../../types';
 import { toLocaleDateString } from '../../utils/datestring';
+
+import classes from './CommentsBrowser.module.css';
 
 const COMMENTS_PER_PAGE = 4;
 
@@ -40,8 +38,7 @@ const Comment = (item: CommentData) => (
   </div>
 );
 
-const CommentsBrowser = () => {
-  const [comments,] = useHttpRequest<CommentData>('comments');
+const CommentsBrowser: React.FC<{ comments: CommentData[] | undefined }> = ({ comments }) => {
   const [sortOrder, setSortOrder] = useState<SortOrder>(-1);
 
   const onOldestClickHanlder = () => { setSortOrder(1); };

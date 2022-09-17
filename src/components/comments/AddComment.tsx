@@ -23,7 +23,7 @@ type FormReducerAction = {
   payload?: string,
 };
 
-const AddComment = () => {
+const AddComment: React.FC<{ onAdded: () => void }> = (props) => {
 
   const [formState, formDispatch] = useReducer(
     (state: FormReducerState, action: FormReducerAction) => {
@@ -54,6 +54,8 @@ const AddComment = () => {
       body: JSON.stringify({ name, email, content }),
       headers: { 'Content-Type': 'application/json' }
     });
+    props.onAdded();
+    alert('Thank you for your comment!');
   };
 
   return (
