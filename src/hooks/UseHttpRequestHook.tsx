@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 import  { RequestData } from '../types';
 
-const BACKEND_URL = 'https://62cbcfcd8042b16aa7c2d987.mockapi.io/blog/api';
+const BACKEND_URL = process.env.NODE_ENV === 'development'
+  ? 'https://some_url_that_doesnt_exist'
+  : 'https://62cbcfcd8042b16aa7c2d987.mockapi.io/blog/api';
 
 type HttpOptions = {
   method: string
