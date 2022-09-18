@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import classes from './Header.module.css';
 
+import { AuthContext, AuthContextProvider } from '../../context/AuthContext';
+
+import classes from './Header.module.css';
 import logo from './imgs/logo.png';
 
 const Logo: React.FC<{ url: string }> = (props) => (
@@ -31,6 +34,25 @@ const CommentsButton: React.FC<{ onClicked: () => void }> = (props) => {
   );
 };
 
+const LoginButtonWithContext = () => {
+  const { auth, setAuth } = useContext(AuthContext);
+  const onClickHandler = () => {
+    if (window.confirm(`Are you sure you want to ${auth ? 'logout' : 'login'}?`))
+      setAuth(auth => !auth)
+  }
+  return (
+    <button type='button' onClick={onClickHandler}>
+      {auth ? '🔓' : '🔐'}
+    </button>
+  )
+};
+
+const LoginButton = () => (
+  <AuthContextProvider>
+      <LoginButtonWithContext />
+  </AuthContextProvider>
+);
+
 const NavBar: React.FC<{ onScrollToComments: () => void }> = (props) => {
   return (
     <nav>
@@ -42,6 +64,7 @@ const NavBar: React.FC<{ onScrollToComments: () => void }> = (props) => {
           <NavLinkWrapper to='Services' />
           <NavLinkWrapper to='Experience' />
           <CommentsButton onClicked={props.onScrollToComments} />
+          <LoginButton />
         </div>
       </div>
     </nav>
