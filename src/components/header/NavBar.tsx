@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { AuthContext, AuthContextProvider } from '../../context/AuthContext';
+import { configureStore } from '../../store/hooks/auth-store';
+import { useStore } from '../../store/hooks/store';
 
 import classes from './Header.module.css';
 import logo from './imgs/logo.png';
@@ -36,21 +38,34 @@ const CommentsButton: React.FC<{ onClicked: () => void }> = (props) => {
 
 const LoginButtonWithContext = () => {
   const { auth, setAuth } = useContext(AuthContext);
+  return (
+    <button type='button' onClick={() => setAuth(auth => !auth)}>
+      {auth ? '🔓' : '🔐'}
+    </button>
+  );
+};
+
+configureStore();
+const LoginButtonWithHook = () => {
+  const [state, dispatch] = useStore();
   const onClickHandler = () => {
-    if (window.confirm(`Are you sure you want to ${auth ? 'logout' : 'login'}?`))
-      setAuth(auth => !auth)
+    if (window.confirm(`Are you sure you want to ${state.auth ? 'logout' : 'login'}?`))
+      dispatch('TOGGLE_AUTH');
   }
   return (
     <button type='button' onClick={onClickHandler}>
-      {auth ? '🔓' : '🔐'}
+      {state.auth ? '💁‍♀️' : '🙅‍♀️'}
     </button>
-  )
+  );
 };
 
 const LoginButton = () => (
+  <>
   <AuthContextProvider>
       <LoginButtonWithContext />
   </AuthContextProvider>
+  <LoginButtonWithHook />
+  </>
 );
 
 const NavBar: React.FC<{ onScrollToComments: () => void }> = (props) => {
