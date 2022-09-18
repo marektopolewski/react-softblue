@@ -12,11 +12,8 @@ export const AnimatedButton: React.FC<AnimatedButtonProps> = (props) => {
   const [show, setShow] = useState<boolean>(false);
   const timeout = props.timeout ?? 200;
   return (
-    <Transition in={show} timeout={timeout}>
-      { state => {
-        if (state === 'exited')
-          setShow(false);
-        return (
+    <Transition in={show} timeout={timeout} onEntered={setShow.bind(null, false)}>
+      { state => (
           <button
             type={props.type}
             onClick={() => setShow(true)}
@@ -29,8 +26,8 @@ export const AnimatedButton: React.FC<AnimatedButtonProps> = (props) => {
           >
             {props.text}
           </button>
-        );
-      }}
+        )
+      }
     </Transition>
   )
 };
