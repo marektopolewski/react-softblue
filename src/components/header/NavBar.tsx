@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { AuthContext, AuthContextProvider } from '../../context/AuthContext';
 import { configureStore } from '../../store/hooks/auth-store';
 import { useStore } from '../../store/hooks/store';
+import AuthReduxProvider, { StoreState, toggle } from '../../store/redux/store';
 
 import classes from './Header.module.css';
 import logo from './imgs/logo.png';
@@ -59,12 +61,26 @@ const LoginButtonWithHook = () => {
   );
 };
 
+
+const LoginButtonWithRedux = () => {
+  const auth = useSelector((state: StoreState) => state.authentication.auth);
+  const dispatch = useDispatch();
+  return (
+    <button type='button' onClick={() => dispatch(toggle())}>
+      {auth ? '✅' : '❌'}
+    </button>
+  );
+};
+
 const LoginButton = () => (
   <>
   <AuthContextProvider>
       <LoginButtonWithContext />
   </AuthContextProvider>
   <LoginButtonWithHook />
+  <AuthReduxProvider>
+      <LoginButtonWithRedux />
+  </AuthReduxProvider>
   </>
 );
 
